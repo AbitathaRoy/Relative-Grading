@@ -108,7 +108,7 @@ def skewed_generator(n=100, success_proportion=5, failure_proportion=2, seed=Non
     # Optional plot section
     if plot:
         sns.kdeplot(marks, fill=True)
-        plt.title("Left-Skewed Distribution of Marks")
+        plt.title("Skewed Distribution of Marks")
         plt.xlabel("Marks")
         plt.ylabel("Density")
         plt.xlim(0, 160)
@@ -142,7 +142,7 @@ def bimodal_generator(n=100, mean1= 30, sd1=8, mean2=70, sd2=8, seed=None, plot=
 
     # Combine, clip to [a, b], and convert to int
     marks = np.concatenate([group1, group2])
-    marks = np.clip(marks, a=0, b=160).astype(int)
+    marks = np.clip(marks, 0, 160).astype(int)
 
     # Write to file
     with open("input.txt", "w") as file:

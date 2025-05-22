@@ -59,29 +59,66 @@ def visualizer(percent, grade_points):
     grade_counts = grade_points_clean.value_counts().reindex(possible_grades, fill_value=0).sort_index()
 
     # Step 3: Plotting
-    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
     # Plot 1: Smooth curve for percentage using KDE
-    sns.kdeplot(percent, fill=True, ax=axes[0, 0], bw_adjust=1)
-    axes[0, 0].set_title("Smoothed Percentage Distribution")
-    axes[0, 0].set_xlabel("Percentage (%)")
-    axes[0, 0].set_ylabel("Density")
-    axes[0, 0].set_xlim(-5, 105)  # One interval before and after
+    sns.kdeplot(percent, fill=True, ax=axes[0], bw_adjust=1)
+    axes[0].set_title("Smoothed Percentage Distribution")
+    axes[0].set_xlabel("Percentage (%)")
+    axes[0].set_ylabel("Density")
+    axes[0].set_xlim(-5, 105)  # One interval before and after
 
     # Plot 2: Smoothed grade frequency using a line plot
-    axes[1, 1].plot(possible_grades, grade_counts.values, marker='o', linestyle='-', color='orange')
-    axes[1, 1].set_title("Grade Points Distribution (Smoothed Line)")
-    axes[1, 1].set_xlabel("Grade Points")
-    axes[1, 1].set_ylabel("Number of Students")
-    axes[1, 1].set_xticks(possible_grades)
-    axes[1, 1].set_xlim(2, 11)
+    # axes[1, 1].plot(possible_grades, grade_counts.values, marker='o', linestyle='-', color='orange')
+    # axes[1, 1].set_title("Grade Points Distribution (Smoothed Line)")
+    # axes[1, 1].set_xlabel("Grade Points")
+    # axes[1, 1].set_ylabel("Number of Students")
+    # axes[1, 1].set_xticks(possible_grades)
+    # axes[1, 1].set_xlim(2, 11)
 
     # Plot 3: Smooth density curve for grade frequency using KDE
-    sns.kdeplot(grade_points_clean, fill=True, ax=axes[1, 0], bw_adjust=0.5, clip=(2, 11))
-    axes[1, 0].set_title("Smoothed Grade Points Distribution")
-    axes[1, 0].set_xlabel("Grade Points")
-    axes[1, 0].set_ylabel("Density")
-    axes[1, 0].set_xlim(2, 11)
+    sns.kdeplot(grade_points_clean, fill=True, ax=axes[1], bw_adjust=0.5, clip=(2, 11))
+    axes[1].set_title("Smoothed Grade Points Distribution")
+    axes[1].set_xlabel("Grade Points")
+    axes[1].set_ylabel("Density")
+    axes[1].set_xlim(2, 11)
+
+    plt.tight_layout()
+    plt.show()
+
+def visualizer(percent, grade_points):
+    # Step 1: Preprocess grade points
+    grade_points_clean = grade_points.copy()
+    grade_points_clean = grade_points_clean.apply(lambda x: 3 if x < 4 else x)
+
+    # Step 2: Grade point frequency smoothing
+    possible_grades = np.arange(3, 11)
+    grade_counts = grade_points_clean.value_counts().reindex(possible_grades, fill_value=0).sort_index()
+
+    # Step 3: Plotting
+    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+
+    # Plot 1: Smooth curve for percentage using KDE
+    # sns.kdeplot(percent, fill=True, ax=axes[0], bw_adjust=1)
+    # axes[0].set_title("Smoothed Percentage Distribution")
+    # axes[0].set_xlabel("Percentage (%)")
+    # axes[0].set_ylabel("Density")
+    # axes[0].set_xlim(-5, 105)  # One interval before and after
+
+    # Plot 2: Smoothed grade frequency using a line plot
+    axes[0].plot(possible_grades, grade_counts.values, marker='o', linestyle='-', color='orange')
+    axes[0].set_title("Grade Points Distribution (Smoothed Line)")
+    axes[0].set_xlabel("Grade Points")
+    axes[0].set_ylabel("Number of Students")
+    axes[0].set_xticks(possible_grades)
+    axes[0].set_xlim(2, 11)
+
+    # Plot 3: Smooth density curve for grade frequency using KDE
+    sns.kdeplot(grade_points_clean, fill=True, ax=axes[1], bw_adjust=1, clip=(2, 11))
+    axes[1].set_title("Smoothed Grade Points Distribution")
+    axes[1].set_xlabel("Grade Points")
+    axes[1].set_ylabel("Density")
+    axes[1].set_xlim(2, 11)
 
     plt.tight_layout()
     plt.show()

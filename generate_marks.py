@@ -6,26 +6,26 @@ from marks_generators import uniform_generator, normal_generator, skewed_generat
     bimodal_generator
 
 # values
-number_of_marks = 100
+number_of_marks = 1000
 seed = None
 plot = True
 # for uniform
-lower_limit = 50
-upper_limit = 90
+lower_limit = 90
+upper_limit = 150
 # for normal
-mean = 40
-sd = 10
+mean = 90
+sd = 15
 # for skewed
-success_proportion = 0.75
-failure_proportion = 1.75
+success_proportion = 1.2
+failure_proportion = 1.8
 # for bimodal
-mean1 = 30
+mean1 = 32
 sd1 = 8
-mean2 = 70
+mean2 = 140
 sd2 = 8
 
 # function calls
-# uniform_generator(n=number_of_marks, seed=seed, plot=plot)
+# uniform_generator(n=number_of_marks, lower_limit=lower_limit, upper_limit=upper_limit, seed=seed, plot=plot)
 # normal_generator(n=number_of_marks, mean=mean, sd=sd, seed=seed, plot=plot)
-skewed_generator(n=number_of_marks, success_proportion=success_proportion, failure_proportion=failure_proportion, seed=seed, plot=plot)
-# bimodal_generator(n=number_of_marks, mean1=mean1, sd1=sd1, mean2=mean2, sd2=sd2, seed=seed, plot=plot)
+# skewed_generator(n=number_of_marks, success_proportion=success_proportion, failure_proportion=failure_proportion, seed=seed, plot=plot)
+bimodal_generator(n=number_of_marks, mean1=mean1, sd1=sd1, mean2=mean2, sd2=sd2, seed=seed, plot=plot)
