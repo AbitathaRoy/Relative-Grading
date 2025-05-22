@@ -5,28 +5,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def marks_generator(n, a, b):
-    """
-    Function to generate random integer marks within a limit
-    and return them to a text file as an integer in each line (in string format).
-
-    :param n: no. of marks to be generated
-    :param a: lower limit
-    :param b: upper limit
-    :return: none
-    """
-    marks = []
-
-    for i in range(n):
-        marks.append(random.randint(a, b))
-
-    with open("input.txt", "w") as file:
-        for mark in marks:
-            file.write(f"{mark}\n")
-
-        file.close()
-
-    # return marks
 
 def marks_normalizer(mean, sd, percent):
     """
